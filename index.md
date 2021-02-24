@@ -1,37 +1,60 @@
-## Welcome to GitHub Pages
+# tracker_209as
+## Scope of the project
 
-You can use the [editor on GitHub](https://github.com/mingyuw/tracker_209as/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+1. Overall project goal, vision, and specific aims (deliverables) describe clearly what you are trying to do, why is it important, and how is it done today
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+    The project is to conduct research of the latest version of SiamFC(v2/CVPR'17) and SimaFC++(arXiv:1911.06188), which are popular object tracking algorithms. Open source code of SiamFC++ will be studied and executed. The performance of the SiamFC++ will be compared to Nvidia commercial proprietary non-open source tracker. The algorithm of SiamFC++ and/or SiamFC will be optimized and rewritten in C/C++, and also will be analyzed to determine if it can be efficiently implemented on FPGA with High-Level Synthesis (HLS) and/or Verilog, and if possible, on openOPU platform. Previous studies and optimization of SiamFC and SiamFC++ are all on GPU platforms. Implementing SiamFC and SiamFC++ on FPGA may provide a low power, low latency alternative. No related research has been found on internet.
 
-### Markdown
+1. Technical approach covering data sets, algorithms, etc. and novelty of your approach.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    For the comparison matrix, the pre-trained model provided by the creators and Nvida will be used. 
+Algorithm used are SiamFC, NvDCF, KLT, and IOU.
 
-```markdown
-Syntax highlighted code block
+1. Implementation, experimental evaluation, success metrics, and key findings.
 
-# Header 1
-## Header 2
-### Header 3
+    A report will be provided for the comparison matrix and the possible algorithm modification or improvement so it will fit into FPGA. 
 
-- Bulleted
-- List
+1. Prior work examples including references, and the relative novelty of your work.
 
-1. Numbered
-2. List
+    Prior work examples include SiamFC open source code, and links to Nvidia DeepStream SDK.
 
-**Bold** and _Italic_ and `Code` text
+1. Strengths and weakness, and future directions.
 
-[Link](url) and ![Image](src)
+    The intention of the project is evaluating the feasibility and possible benefits implementing of a popular tracker on FPGA platform. However, with the ever increasing performance of modern GPUs, implementing SiamFC tracker on FPGA may not make sense from either technical or economy point of view. A more FPGA/ASCI friendly tracker may need to be created.
+
+1. Contributions of each team member.
+
+    Mingyu Wang will cover the entire project.
+
+1. Section with links to PDF of your final presentation slides, and any data sets not in your repo.
+
+    TBD
+
+1. References (with hyperlinks to papers, websites etc.)
+
+    https://www.robots.ox.ac.uk/~luca/siamese-fc.html;    
+    https://developer.nvidia.com/Deepstream-sdk;    
+    https://arxiv.org/abs/1911.06188;    
+    https://github.com/MegviiDetection/video_analyst;
+
+## How to build and run the project
+Prerequisite: NVIDIA DeepStream SDK
+
+Installation instructions can be found here: 
+
+https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html
+
+After installation, using the following steps to run the tracker app
+
+1. enter tracker app folder
+```Bash
+cd ~/tracker_209as/sources/apps/my_apps/tracker
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mingyuw/tracker_209as/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+2. Build the tracker app
+```Bash
+make
+```
+3. Run tracker app
+```Bash
+./tracker -c configs/config.txt -t
+```
