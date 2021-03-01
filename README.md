@@ -3,7 +3,7 @@
 
 1. Overall project goal, vision, and specific aims (deliverables) describe clearly what you are trying to do, why is it important, and how is it done today
 
-    The project is to conduct research of the latest version of SiamFC(v2/CVPR'17) and SimaFC++(arXiv:1911.06188), which are popular object tracking algorithms. Open source code of SiamFC++ will be studied and executed. The performance of the SiamFC++ will be compared to Nvidia commercial proprietary non-open source tracker. The algorithm of SiamFC++ and/or SiamFC will be optimized and rewritten in C/C++, and also will be analyzed to determine if it can be efficiently implemented on FPGA with High-Level Synthesis (HLS) and/or Verilog, and if possible, on openOPU platform. Previous studies and optimization of SiamFC and SiamFC++ are all on GPU platforms. Implementing SiamFC and SiamFC++ on FPGA may provide a low power, low latency alternative. No related research has been found on internet.
+    The project is to conduct research of the latest version of SiamFC(v2/CVPR'17) and SimaFC++(arXiv:1911.06188), which are popular object tracking algorithms. Open source code of SiamFC++ will be studied and executed. The performance of the SiamFC++ will be compared to Nvidia commercial proprietary non-open source tracker and opencv trackers. The algorithm of SiamFC++ and/or SiamFC will be optimized and rewritten in C/C++, and also will be analyzed to determine if it can be efficiently implemented on FPGA with High-Level Synthesis (HLS) and/or Verilog, and if possible, on openOPU platform. Previous studies and optimization of SiamFC and SiamFC++ are all on GPU platforms. Implementing SiamFC and SiamFC++ on FPGA may provide a low power, low latency alternative. No related research has been found on internet.
 
 1. Technical approach covering data sets, algorithms, etc. and novelty of your approach.
 
@@ -38,17 +38,19 @@ Algorithm used are SiamFC, NvDCF, KLT, and IOU.
     https://github.com/MegviiDetection/video_analyst;
 
 ## How to build and run the project
+
+### Build and run DeepStream trackers test app
 Prerequisite: NVIDIA DeepStream SDK
 
 Installation instructions can be found here: 
 
 https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html
 
-After installation, using the following steps to run the tracker app
+After installation, using the following steps to build run the tracker test app
 
-1. enter tracker app folder
+1. enter tracker_deep app folder
 ```Bash
-cd ~/tracker_209as/sources/apps/my_apps/tracker
+cd ~/tracker_209as/sources/apps/my_apps/tracker_deepstream
 ```
 2. Build the tracker app
 ```Bash
@@ -58,3 +60,34 @@ make
 ```Bash
 ./tracker -c configs/config.txt -t
 ```
+
+To switch trackers, change the tracker libary in configs/config files in the [tracker] section
+### Build and run OpenCV trackers test app
+Prerequisite: OpenCV 4.5.x
+
+Installation instructions can be found here: 
+
+https://docs.opencv.org/master/d2/de6/tutorial_py_setup_in_ubuntu.html 
+
+After installation, using the following steps to run the tracker test app
+
+1. enter tracker_deep app folder
+```Bash
+cd ~/tracker_209as/sources/apps/my_apps/tracker_opencv
+```
+2. Build the tracker app
+```Bash
+mkdir build
+cd build
+cmake ../.
+make
+```
+3. Run tracker app
+```Bash
+./tracker_opencv video ../../../../../videos/single_car.mp4
+```
+To switch trackers, change the following line in main.cpp under create tracker object section and make again
+
+See https://docs.opencv.org/3.4/d9/df8/group__tracking.html for the list of trackers supported by OpenCV
+
+### Build and run SiamFC tracker app
