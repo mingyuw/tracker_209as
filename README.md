@@ -91,3 +91,28 @@ To switch trackers, change the following line in main.cpp under create tracker o
 See https://docs.opencv.org/3.4/d9/df8/group__tracking.html for the list of trackers supported by OpenCV
 
 ### Build and run SiamFC tracker app
+
+SimaFC tracker is a python based application wrapped with cython and embeded into C/C++. The advantages of using Cython can be found at https://cython.org/
+
+python code and NN models and weights are partially from https://github.com/logiklesuraj/SiamFC, with some modifications
+
+Prerequisites: 
+
+* Python 3.6.x
+* OpenCV 4.5.x
+* Pytorch. Pytorch can be install using following command assuming you use cuda 10.2 
+```Bash
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+```
+
+Using the following steps to run the SiamTracker app
+1. Build SiamTracker app
+```Bash
+make
+```
+2. Run SiamTracker app
+```Bash
+./tracker_siamfc
+```
+
+
