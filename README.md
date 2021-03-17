@@ -3,7 +3,9 @@
 
 1. Overall project goal, vision, and specific aims (deliverables) describe clearly what you are trying to do, why is it important, and how is it done today
 
-    The project is to conduct research of the latest version of SiamFC(v2/CVPR'17) and SimaFC++(arXiv:1911.06188), which are popular object tracking algorithms. Open source code of SiamFC++ will be studied and executed. The performance of the SiamFC++ will be compared to Nvidia commercial proprietary non-open source tracker and opencv trackers. The algorithm of SiamFC++ and/or SiamFC will be optimized and rewritten in C/C++, and also will be analyzed to determine if it can be efficiently implemented on FPGA with High-Level Synthesis (HLS) and/or Verilog, and if possible, on openOPU platform. Previous studies and optimization of SiamFC and SiamFC++ are all on GPU platforms. Implementing SiamFC and SiamFC++ on FPGA may provide a low power, low latency alternative. No related research has been found on internet.
+    The project is to conduct research of the latest version of SiamFC(v2/CVPR'17) which are popular object tracking algorithms. A portion of python source code, Alexnet backbone and weights of https://github.com/logiklesuraj/SiamFC is used when implemention siamfc_tracker using cython and C/C++. 
+    
+    The performance of the siamfc_tracker was compared to Nvidia commercial proprietary non-open source tracker and opencv trackers. After evaluation, the CNN portion of the Alexnet can be implemented on FPGA using openOPU toolchain. 
 
 1. Technical approach covering data sets, algorithms, etc. and novelty of your approach.
 
@@ -28,7 +30,8 @@ Algorithm used are SiamFC, NvDCF, KLT, and IOU.
 
 1. Section with links to PDF of your final presentation slides, and any data sets not in your repo.
 
-    TBD
+    Presentaton slides in both PDF and PPTX format can be found in this google driver folder
+    https://drive.google.com/drive/folders/1kQ9oYGNKJQIJq9AKnScDSJJKIHCBMGqS?usp=sharing
 
 1. References (with hyperlinks to papers, websites etc.)
 
@@ -36,9 +39,11 @@ Algorithm used are SiamFC, NvDCF, KLT, and IOU.
     https://developer.nvidia.com/Deepstream-sdk;    
     https://arxiv.org/abs/1911.06188;    
     https://github.com/MegviiDetection/video_analyst;
+    https://github.com/logiklesuraj/SiamFC;
 
 ## How to build and run the project
 
+All projects are built and tested on ubuntu 18.04
 ### Build and run DeepStream trackers test app
 Prerequisite: NVIDIA DeepStream SDK
 
@@ -48,7 +53,7 @@ https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html
 
 After installation, using the following steps to build run the tracker test app
 
-1. enter tracker_deep app folder
+1. enter tracker_deepstream app folder
 ```Bash
 cd ~/tracker_209as/sources/apps/my_apps/tracker_deepstream
 ```
@@ -71,7 +76,7 @@ https://docs.opencv.org/master/d2/de6/tutorial_py_setup_in_ubuntu.html
 
 After installation, using the following steps to run the tracker test app
 
-1. enter tracker_deep app folder
+1. enter tracker_opencv app folder
 ```Bash
 cd ~/tracker_209as/sources/apps/my_apps/tracker_opencv
 ```
@@ -94,11 +99,11 @@ See https://docs.opencv.org/3.4/d9/df8/group__tracking.html for the list of trac
 
 SimaFC tracker is a python based application wrapped with cython and embeded into C/C++. The advantages of using Cython can be found at https://cython.org/
 
-python code and NN models and weights are partially from https://github.com/logiklesuraj/SiamFC, with some modifications
+Python code, NN models and weights are partially from https://github.com/logiklesuraj/SiamFC, with some modifications
 
 Prerequisites: 
 
-* Python 3.6.x
+* Python 3.6.x, note Python 3.8.x was tested but it caused segmentation error when embedded into C/C++ application
 * OpenCV 4.5.x
 * Pytorch. Pytorch can be install using following command assuming you use cuda 10.2 
 ```Bash
@@ -106,11 +111,15 @@ conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 ```
 
 Using the following steps to run the SiamTracker app
-1. Build SiamTracker app
+1. enter tracker_siamfc app folder
+```Bash
+cd ~/tracker_209as/sources/apps/my_apps/tracker_siamfc
+```
+2. Build SiamTracker app
 ```Bash
 make
 ```
-2. Run SiamTracker app
+3. Run SiamTracker app
 ```Bash
 ./tracker_siamfc
 ```

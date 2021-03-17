@@ -22,11 +22,6 @@ def load_net(fname, net):
     pretrained_dict = {'model.'+key: value for key, value in pretrained_dict.items()}
     net.load_state_dict(pretrained_dict)
     print(net)
-    # Convert to Torch sctript via annotation for C++ code
-    sm = torch.jit.script(net)
-
- 
-
 
 
 def convert_bbox_format(bbox, to='center-based'):
