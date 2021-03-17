@@ -9,16 +9,15 @@
 
 1. Technical approach covering data sets, algorithms, etc. and novelty of your approach.
 
-    For the comparison matrix, the pre-trained model provided by the creators and Nvida will be used. 
-Algorithm used are SiamFC, NvDCF, KLT, and IOU.
+    For the comparison matrix, the pre-trained AlexNet model for SiamFC and Nvida will be used. Algorithm used are SiamFC, NVIDIA NvDCF tracker and OpenCV trackers
 
 1. Implementation, experimental evaluation, success metrics, and key findings.
 
-    A report will be provided for the comparison matrix and the possible algorithm modification or improvement so it will fit into FPGA. 
+    Implemented SiamFC, OpenCV and NVIDIA tracker for comparison, came up with trackers comparison matrix. Modified, optimized and used Cython to compile open source SiamFC code, and embedded it into C/C++ applicatons. 
 
 1. Prior work examples including references, and the relative novelty of your work.
 
-    Prior work examples include SiamFC open source code, and links to Nvidia DeepStream SDK.
+    Prior work examples include SiamFC open source code (https://github.com/MegviiDetection/video_analyst; https://github.com/logiklesuraj/SiamFC;) , Nvidia DeepStream SDK (https://developer.nvidia.com/Deepstream-sdk), OpenCV trackers (https://docs.opencv.org/4.5.1/d9/df8/group__tracking.html). Optimizing SiamFC with Cython and C/C++ is not found to be done before.
 
 1. Strengths and weakness, and future directions.
 
@@ -40,6 +39,7 @@ Algorithm used are SiamFC, NvDCF, KLT, and IOU.
     https://arxiv.org/abs/1911.06188;    
     https://github.com/MegviiDetection/video_analyst;
     https://github.com/logiklesuraj/SiamFC;
+    https://docs.opencv.org/4.5.1/d9/df8/group__tracking.html;
 
 ## How to build and run the project
 
